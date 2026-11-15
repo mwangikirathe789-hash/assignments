@@ -1,0 +1,347 @@
+ Program to Find the Sum of First N Natural Numbers [5 Marks]
+
+ 
+#include <iostream>
+using namespace std;
+
+int sum(int n) {
+    if (n == 0)
+        return 0;
+    else
+        return n + sum(n - 1);
+}
+
+int main() {
+    int n;
+
+    cout << "Enter a number: ";
+    cin >> n;
+
+    cout << "Sum = " << sum(n);
+
+    return 0;
+}
+
+
+(b) Program to Find the Factorial of a Number
+
+
+
+#include <iostream>
+using namespace std;
+
+int factorial(int n) {
+    if (n == 0 || n == 1)
+        return 1;
+    else
+        return n * factorial(n - 1);
+}
+
+int main() {
+    int n;
+
+    cout << "Enter a number: ";
+    cin >> n;
+
+    cout << "Factorial = " << factorial(n);
+
+    return 0;
+}
+
+
+C.Program to Find the Nth Term of a Fibonacci Series
+
+
+#include <iostream>
+using namespace std;
+
+int fibonacci(int n) {
+    if (n == 0)
+        return 0;
+    else if (n == 1)
+        return 1;
+    else
+        return fibonacci(n - 1) +
+               fibonacci(n - 2);
+}
+
+int main() {
+    int n;
+
+    cout << "Enter the term number: ";
+    cin >> n;
+
+    cout << "Fibonacci term = "
+         << fibonacci(n);
+
+    return 0;
+}
+
+
+ Program to Generate N Terms of a Fibonacci Series 
+
+ 
+#include <iostream>
+using namespace std;
+
+void fibonacci(int n, int a = 0, int b = 1) {
+    if (n == 0)
+        return;
+
+    cout << a << " ";
+
+    fibonacci(n - 1, b, a + b);
+}
+
+int main() {
+    int n;
+
+    cout << "Enter number of terms: ";
+    cin >> n;
+
+    cout << "Fibonacci Series: ";
+
+    fibonacci(n);
+
+    return 0;
+}
+  
+
+Program to Perform Enqueue and Dequeue Operations in a Queue
+
+
+
+#include <iostream>
+using namespace std;
+
+#define SIZE 5
+
+class Queue {
+    int arr[SIZE];
+    int front, rear;
+
+public:
+    Queue() {
+        front = -1;
+        rear = -1;
+    }
+
+    // Enqueue operation
+    void enqueue(int value) {
+        if (rear == SIZE - 1) {
+            cout << "Queue Overflow!" << endl;
+        }
+        else {
+            if (front == -1)
+                front = 0;
+
+            rear++;
+            arr[rear] = value;
+
+            cout << value << " inserted into queue"
+                 << endl;
+        }
+    }
+
+    // Dequeue operation
+    void dequeue() {
+        if (front == -1 || front > rear) {
+            cout << "Queue Underflow!" << endl;
+        }
+        else {
+            cout << "Deleted element: "
+                 << arr[front] << endl;
+
+            front++;
+
+            if (front > rear) {
+                front = rear = -1;
+            }
+        }
+    }
+
+    // Display operation
+    void display() {
+        if (front == -1) {
+            cout << "Queue is empty!" << endl;
+        }
+        else {
+            cout << "Queue elements: ";
+
+            for (int i = front; i <= rear; i++) {
+                cout << arr[i] << " ";
+            }
+
+            cout << endl;
+        }
+    }
+};
+
+int main() {
+    Queue q;
+
+    q.enqueue(10);
+    q.enqueue(20);
+    q.enqueue(30);
+
+    q.display();
+
+    q.dequeue();
+
+    q.display();
+
+    return 0;
+}
+
+
+Program to Represent a Sparse Matrix Using Arrays
+
+
+
+#include <iostream>
+using namespace std;
+
+int main() {
+    int a[10][10], sparse[100][3];
+    int rows, cols, k = 1;
+
+    cout << "Enter number of rows and columns: ";
+    cin >> rows >> cols;
+
+    cout << "Enter matrix elements:" << endl;
+
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            cin >> a[i][j];
+        }
+    }
+
+    // Store non-zero elements
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            if (a[i][j] != 0) {
+                sparse[k][0] = i;
+                sparse[k][1] = j;
+                sparse[k][2] = a[i][j];
+                k++;
+            }
+        }
+    }
+
+    // Store matrix information
+    sparse[0][0] = rows;
+    sparse[0][1] = cols;
+    sparse[0][2] = k - 1;
+
+    cout << "\nSparse Matrix Representation:\n";
+    cout << "Row\tColumn\tValue\n";
+
+    for (int i = 0; i < k; i++) {
+        for (int j = 0; j < 3; j++) {
+            cout << sparse[i][j] << "\t";
+        }
+        cout << endl;
+    }
+
+    return 0;
+}
+
+
+Circular Queue Using C++
+
+
+
+#include <iostream>
+using namespace std;
+
+#define SIZE 5
+
+class CircularQueue {
+private:
+    int queue[SIZE];
+    int front, rear;
+
+public:
+    CircularQueue() {
+        front = -1;
+        rear = -1;
+    }
+
+    // Insert an element
+    void enqueue(int value) {
+        if ((rear + 1) % SIZE == front) {
+            cout << "Queue Overflow!" << endl;
+            return;
+        }
+
+        if (front == -1) {
+            front = 0;
+        }
+
+        rear = (rear + 1) % SIZE;
+        queue[rear] = value;
+
+        cout << value << " inserted" << endl;
+    }
+
+    // Delete an element
+    void dequeue() {
+        if (front == -1) {
+            cout << "Queue Underflow!" << endl;
+            return;
+        }
+
+        cout << "Deleted: " << queue[front] << endl;
+
+        if (front == rear) {
+            front = rear = -1;
+        } else {
+            front = (front + 1) % SIZE;
+        }
+    }
+
+    // Display queue elements
+    void display() {
+        if (front == -1) {
+            cout << "Queue is empty" << endl;
+            return;
+        }
+
+        cout << "Queue elements: ";
+
+        int i = front;
+
+        while (true) {
+            cout << queue[i] << " ";
+
+            if (i == rear)
+                break;
+
+            i = (i + 1) % SIZE;
+        }
+
+        cout << endl;
+    }
+};
+
+int main() {
+    CircularQueue q;
+
+    q.enqueue(10);
+    q.enqueue(20);
+    q.enqueue(30);
+    q.enqueue(40);
+
+    q.display();
+
+    q.dequeue();
+    q.dequeue();
+
+    q.enqueue(50);
+    q.enqueue(60);
+
+    q.display();
+
+    return 0;
+}
+
